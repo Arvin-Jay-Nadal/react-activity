@@ -5,18 +5,22 @@ import React, { useState } from "react";
 // and use the props to pass the input data to TodoList on submit
 
 function TodoForm(props) {
-  const [input, setInput] = React.useState("");
+  const [input, setInput] = useState(" ");
 
-  const handleChange = (e) => {};
+  const handleChange = (event) => {
+    setInput(event.target.value);
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
+
+    props.addTodo(input);
   };
 
   return (
-    <form className="todo-form">
-      <input placeholder="Add a todo" name="text" className="todo-input" />
-      <button type="submit" className="todo-button">
+    <form className="todo-form" onSubmit={handleSubmit}>
+      <input placeholder="Add a todo" name="text" className="todo-input" onChange={handleChange} required/>
+      <button type="submit" className="todo-button" > 
         Add todo
       </button>
     </form>
